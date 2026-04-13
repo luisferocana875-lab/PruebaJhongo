@@ -1,20 +1,35 @@
-import { Component, AfterViewInit, ElementRef, viewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, AfterViewInit, ElementRef, viewChild, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 import { animate } from 'motion';
+import { CartService, Product } from '../../services/cart.service';
+import { PRODUCTS } from '../../data/products';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, RouterLink],
   templateUrl: './home.html'
 })
 export class HomeComponent implements AfterViewInit {
+  private cartService = inject(CartService);
+  private platformId = inject(PLATFORM_ID);
+  
   heroRef = viewChild<ElementRef>('hero');
   valuePropRef = viewChild<ElementRef>('valueProp');
   collectionsSectionRef = viewChild<ElementRef>('collectionsSection');
 
+  popularProducts = PRODUCTS.slice(0, 4);
+
+  addToCart(event: Event, product: Product) {
+    event.stopPropagation(); // Prevent navigation to detail page
+    this.cartService.addToCart(product);
+  }
+
   ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     // Initial animations
     const hero = this.heroRef()?.nativeElement;
     if (hero) {
@@ -34,13 +49,6 @@ export class HomeComponent implements AfterViewInit {
     { title: 'Esenciales de Verano', img: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=800', category: 'Hombre' },
     { title: 'Elegancia Atemporal', img: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=800', category: 'Mujer' },
     { title: 'Accesorios Premium', img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=800', category: 'Unisex' }
-  ];
-
-  popularProducts = [
-    { name: 'Camiseta de Lino Orgánico', price: '45€', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=400' },
-    { name: 'Pantalón Chino Slim', price: '89€', img: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&q=80&w=400' },
-    { name: 'Vestido Minimalista Seda', price: '120€', img: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&q=80&w=400' },
-    { name: 'Gafas de Sol Aviador', price: '155€', img: 'https://images.unsplash.com/photo-1511499767390-90342f16b127?auto=format&fit=crop&q=80&w=400' }
   ];
 
   testimonials = [

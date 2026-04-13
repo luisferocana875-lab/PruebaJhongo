@@ -21,25 +21,28 @@
   <!-- 2. Grid de Productos -->
   <section class="py-20 px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-      @for (prod of filteredProducts; track prod.name) {
-        <div class="group cursor-pointer animate-in fade-in zoom-in duration-500">
-          <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-6 bg-foreground/5">
+      @for (prod of filteredProducts; track prod.id) {
+        <div [routerLink]="['/product', prod.id]" class="group cursor-pointer animate-in fade-in zoom-in duration-500">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-6 bg-foreground/5 shadow-sm group-hover:shadow-xl transition-all duration-500">
             <img [src]="prod.img" [alt]="prod.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer" />
             <div class="absolute top-4 left-4">
               @if (prod.category === 'Nuevo') {
-                <span class="bg-yellow-500 text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Nuevo</span>
+                <span class="bg-yellow-500 text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Edición Limitada</span>
               }
             </div>
-            <button class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span class="bg-white text-black px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Añadir</span>
+            <button 
+              (click)="addToCart($event, prod)"
+              class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+            >
+              <span class="bg-white text-black px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-yellow-500 transition-colors">Añadir al Carrito</span>
             </button>
           </div>
           <div class="flex justify-between items-start">
             <div>
-              <h3 class="text-sm font-bold uppercase tracking-tight mb-1">{{ prod.name }}</h3>
+              <h3 class="text-sm font-bold uppercase tracking-tight mb-1 group-hover:text-yellow-500 transition-colors">{{ prod.name }}</h3>
               <p class="text-xs text-foreground/40 uppercase tracking-widest">{{ prod.category }}</p>
             </div>
-            <p class="text-sm font-bold">{{ prod.price }}</p>
+            <p class="text-sm font-bold">{{ prod.price }}€</p>
           </div>
         </div>
       }

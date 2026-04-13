@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -34,9 +35,13 @@ import { LucideAngularModule } from 'lucide-angular';
           <button class="text-foreground/60 hover:text-foreground transition-colors">
             <lucide-icon name="Search" class="w-5 h-5"></lucide-icon>
           </button>
-          <button class="text-foreground/60 hover:text-foreground transition-colors relative">
+          <button class="text-foreground/60 hover:text-foreground transition-colors relative group">
             <lucide-icon name="ShoppingBag" class="w-5 h-5"></lucide-icon>
-            <span class="absolute -top-1 -right-1 bg-yellow-500 text-[10px] font-bold text-black w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            @if (cartCount() > 0) {
+              <span class="absolute -top-1 -right-1 bg-yellow-500 text-[10px] font-bold text-black w-4 h-4 rounded-full flex items-center justify-center animate-in zoom-in duration-300">
+                {{ cartCount() }}
+              </span>
+            }
           </button>
         </div>
 
@@ -65,7 +70,7 @@ import { LucideAngularModule } from 'lucide-angular';
             </button>
             <button class="flex items-center space-x-2 text-foreground/60">
               <lucide-icon name="ShoppingBag" class="w-5 h-5"></lucide-icon>
-              <span>Carrito (0)</span>
+              <span>Carrito ({{ cartCount() }})</span>
             </button>
           </div>
         </div>
@@ -74,7 +79,9 @@ import { LucideAngularModule } from 'lucide-angular';
   `
 })
 export class NavbarComponent {
+  private cartService = inject(CartService);
   isMenuOpen = signal(false);
+  cartCount = this.cartService.count;
 
   navLinks = [
     { label: 'Inicio', path: '/' },

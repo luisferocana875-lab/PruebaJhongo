@@ -1,5 +1,5 @@
-import { Component, input, ElementRef, viewChild, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, input, ElementRef, viewChild, AfterViewInit, inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { cn } from '../../lib/utils';
 import { animate } from 'motion';
@@ -12,6 +12,8 @@ import { animate } from 'motion';
   styleUrl: './minimalist-hero.css'
 })
 export class MinimalistHero implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+
   logoText = input.required<string>();
   navLinks = input.required<{ label: string; href: string }[]>();
   mainText = input.required<string>();
@@ -30,6 +32,8 @@ export class MinimalistHero implements AfterViewInit {
   footer = viewChild<ElementRef>('footer');
 
   ngAfterViewInit() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     // Animations using motion vanilla
     const headerEl = this.header()?.nativeElement;
     if (headerEl) {

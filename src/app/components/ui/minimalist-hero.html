@@ -1,0 +1,74 @@
+<div [class]="containerClass">
+  <!-- Header -->
+  <header #header class="z-30 flex w-full max-w-7xl items-center justify-between opacity-0">
+    <div class="text-xl font-bold tracking-wider">
+      {{ logoText() }}
+    </div>
+    <div class="hidden items-center space-x-8 md:flex">
+      @for (link of navLinks(); track link.label) {
+        <a
+          [href]="link.href"
+          class="text-sm font-medium tracking-widest text-foreground/60 transition-colors hover:text-foreground"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </div>
+    <button
+      class="flex flex-col space-y-1.5 md:hidden"
+      aria-label="Open menu"
+    >
+      <span class="block h-0.5 w-6 bg-foreground"></span>
+      <span class="block h-0.5 w-6 bg-foreground"></span>
+      <span class="block h-0.5 w-5 bg-foreground"></span>
+    </button>
+  </header>
+
+  <!-- Main Content Area -->
+  <div class="relative grid w-full max-w-7xl flex-grow grid-cols-1 items-center md:grid-cols-3">
+    <!-- Left Text Content -->
+    <div #leftText class="z-20 order-2 md:order-1 text-center md:text-left opacity-0">
+      <p class="mx-auto max-w-xs text-sm leading-relaxed text-foreground/80 md:mx-0">{{ mainText() }}</p>
+      <a [href]="readMoreLink()" class="mt-4 inline-block text-sm font-medium text-foreground underline decoration-from-font">
+        Read More
+      </a>
+    </div>
+
+    <!-- Center Image with Circle -->
+    <div #centerImage class="relative order-1 md:order-2 flex justify-center items-center h-full">
+      <div
+        class="circle absolute z-0 h-[300px] w-[300px] rounded-full bg-yellow-400/90 md:h-[400px] md:w-[400px] lg:h-[500px] lg:w-[500px] opacity-0 scale-80"
+      ></div>
+      <img
+        [src]="imageSrc()"
+        [alt]="imageAlt()"
+        class="relative z-10 h-auto w-56 object-cover md:w-64 scale-150 lg:w-72 opacity-0 translate-y-12"
+        referrerpolicy="no-referrer"
+        (error)="handleImageError($event)"
+      />
+    </div>
+
+    <!-- Right Text -->
+    <div #rightText class="z-20 order-3 flex items-center justify-center text-center md:justify-start opacity-0">
+      <h1 class="text-7xl font-extrabold text-foreground md:text-8xl lg:text-9xl">
+        {{ overlayText().part1 }}
+        <br />
+        {{ overlayText().part2 }}
+      </h1>
+    </div>
+  </div>
+
+  <!-- Footer Elements -->
+  <footer #footer class="z-30 flex w-full max-w-7xl items-center justify-between opacity-0">
+    <div class="flex items-center space-x-4">
+      @for (link of socialLinks(); track $index) {
+        <a [href]="link.href" target="_blank" rel="noopener noreferrer" class="text-foreground/60 transition-colors hover:text-foreground">
+          <lucide-icon [name]="link.icon" class="h-5 w-5"></lucide-icon>
+        </a>
+      }
+    </div>
+    <div class="text-sm font-medium text-foreground/80">
+      {{ locationText() }}
+    </div>
+  </footer>
+</div>

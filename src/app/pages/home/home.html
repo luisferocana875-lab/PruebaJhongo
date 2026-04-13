@@ -1,0 +1,194 @@
+<div class="overflow-hidden">
+  <!-- 1. Hero Principal -->
+  <section #hero class="relative h-[90vh] flex items-center justify-center bg-background">
+    <div class="absolute inset-0 overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1920"
+        alt="Hero Fashion"
+        class="hero-img w-full h-full object-cover opacity-60 scale-110"
+        referrerpolicy="no-referrer"
+      />
+    </div>
+    <div class="relative z-10 text-center px-6 max-w-4xl">
+      <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 uppercase leading-none">
+        Menos es <span class="text-yellow-500">Más</span>
+      </h1>
+      <p class="text-lg md:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto font-medium">
+        Descubre la esencia de la sofisticación a través de nuestra colección curada de prendas esenciales.
+      </p>
+      <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+        <button class="bg-foreground text-background px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-yellow-500 hover:text-black transition-all duration-300">
+          Comprar Ahora
+        </button>
+        <button class="border border-foreground/20 px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-foreground hover:text-background transition-all duration-300">
+          Ver Colección
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Propuesta de Valor -->
+  <section #valueProp class="py-24 px-6 bg-foreground text-background">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16">
+      <div class="text-center space-y-4">
+        <div class="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <lucide-icon name="Truck" class="w-8 h-8 text-yellow-500"></lucide-icon>
+        </div>
+        <h3 class="text-xl font-bold uppercase tracking-widest">Envío Global</h3>
+        <p class="text-background/60 text-sm">Llegamos a cualquier parte del mundo con envíos rápidos y seguros.</p>
+      </div>
+      <div class="text-center space-y-4">
+        <div class="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <lucide-icon name="ShieldCheck" class="w-8 h-8 text-yellow-500"></lucide-icon>
+        </div>
+        <h3 class="text-xl font-bold uppercase tracking-widest">Calidad Premium</h3>
+        <p class="text-background/60 text-sm">Materiales seleccionados a mano para garantizar durabilidad y confort.</p>
+      </div>
+      <div class="text-center space-y-4">
+        <div class="w-16 h-16 bg-yellow-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+          <lucide-icon name="RefreshCw" class="w-8 h-8 text-yellow-500"></lucide-icon>
+        </div>
+        <h3 class="text-xl font-bold uppercase tracking-widest">Devolución Fácil</h3>
+        <p class="text-background/60 text-sm">Si no te convence, tienes 30 días para devolverlo sin compromiso.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Colecciones Destacadas -->
+  <section #collectionsSection class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-yellow-500 mb-2 block">Explorar</span>
+          <h2 class="text-4xl md:text-5xl font-bold tracking-tighter uppercase">Nuestras Colecciones</h2>
+        </div>
+        <a href="#" class="hidden md:flex items-center space-x-2 text-sm font-bold uppercase tracking-widest hover:text-yellow-500 transition-colors">
+          <span>Ver todas</span>
+          <lucide-icon name="ArrowRight" class="w-4 h-4"></lucide-icon>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        @for (col of collections; track col.title) {
+          <div class="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer">
+            <img [src]="col.img" [alt]="col.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerpolicy="no-referrer" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-8">
+              <span class="text-xs font-bold text-yellow-500 uppercase tracking-widest mb-2">{{ col.category }}</span>
+              <h3 class="text-2xl font-bold text-white uppercase tracking-tight">{{ col.title }}</h3>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Productos Populares -->
+  <section class="py-24 px-6 bg-foreground/5">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.3em] text-yellow-500 mb-2 block">Favoritos</span>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tighter uppercase">Los más deseados</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+        @for (prod of popularProducts; track prod.name) {
+          <div class="group cursor-pointer">
+            <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-6">
+              <img [src]="prod.img" [alt]="prod.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer" />
+              <button class="absolute bottom-4 right-4 bg-white text-black p-3 rounded-full opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
+                <lucide-icon name="ShoppingBag" class="w-5 h-5"></lucide-icon>
+              </button>
+            </div>
+            <h3 class="text-sm font-bold uppercase tracking-tight mb-1">{{ prod.name }}</h3>
+            <p class="text-sm text-foreground/60">{{ prod.price }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Sobre la Marca (Story) -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+      <div class="relative">
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-yellow-500/10 rounded-full -z-10"></div>
+        <img
+          src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800"
+          alt="Brand Story"
+          class="rounded-3xl shadow-2xl"
+          referrerpolicy="no-referrer"
+        />
+      </div>
+      <div class="space-y-8">
+        <span class="text-xs font-bold uppercase tracking-[0.3em] text-yellow-500 block">Nuestra Historia</span>
+        <h2 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-none">Diseño con <br/> Propósito</h2>
+        <p class="text-foreground/70 leading-relaxed text-lg">
+          MNMLST nació de la idea de que la moda no debería ser complicada. Creemos en la belleza de lo simple, en la calidad de los materiales y en un proceso de fabricación ético y transparente.
+        </p>
+        <p class="text-foreground/70 leading-relaxed">
+          Cada pieza de nuestra colección está diseñada para durar, trascendiendo las tendencias pasajeras para convertirse en un pilar de tu armario personal.
+        </p>
+        <button class="text-sm font-bold uppercase tracking-widest border-b-2 border-yellow-500 pb-1 hover:text-yellow-500 transition-colors">
+          Conoce más sobre nosotros
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Testimonios -->
+  <section class="py-24 px-6 bg-foreground text-background">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        @for (test of testimonials; track test.name) {
+          <div class="space-y-6">
+            <div class="flex text-yellow-500">
+              <lucide-icon name="Star" class="w-4 h-4 fill-current"></lucide-icon>
+              <lucide-icon name="Star" class="w-4 h-4 fill-current"></lucide-icon>
+              <lucide-icon name="Star" class="w-4 h-4 fill-current"></lucide-icon>
+              <lucide-icon name="Star" class="w-4 h-4 fill-current"></lucide-icon>
+              <lucide-icon name="Star" class="w-4 h-4 fill-current"></lucide-icon>
+            </div>
+            <p class="text-lg font-medium italic">"{{ test.text }}"</p>
+            <div>
+              <h4 class="font-bold uppercase tracking-widest text-sm">{{ test.name }}</h4>
+              <p class="text-xs text-background/40 uppercase tracking-widest">{{ test.role }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Instagram Feed -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-xs font-bold uppercase tracking-[0.3em] text-yellow-500 mb-2 block">Comunidad</span>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tighter uppercase">#MNMLSTLife</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+        @for (post of instagramPosts; track post) {
+          <div class="group relative overflow-hidden rounded-lg aspect-square cursor-pointer">
+            <img [src]="post" alt="Instagram Post" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerpolicy="no-referrer" />
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <lucide-icon name="Instagram" class="w-6 h-6 text-white"></lucide-icon>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Call to Action -->
+  <section class="py-24 px-6 bg-yellow-500">
+    <div class="max-w-4xl mx-auto text-center space-y-8">
+      <h2 class="text-4xl md:text-7xl font-extrabold tracking-tighter uppercase text-black leading-none">
+        ¿Listo para elevar <br/> tu estilo?
+      </h2>
+      <p class="text-black/80 text-lg md:text-xl font-medium max-w-2xl mx-auto">
+        Únete a miles de personas que ya han descubierto el poder de la simplicidad.
+      </p>
+      <button class="bg-black text-white px-12 py-5 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-2xl">
+        Empezar a Comprar
+      </button>
+    </div>
+  </section>
+</div>

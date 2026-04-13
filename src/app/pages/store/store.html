@@ -1,0 +1,99 @@
+<div class="pt-10">
+  <!-- 1. Filtros y Header -->
+  <section class="py-16 px-6 border-b border-foreground/5">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <h1 class="text-4xl font-bold tracking-tighter uppercase">Tienda Online</h1>
+      <div class="flex flex-wrap justify-center gap-4">
+        @for (cat of categories; track cat) {
+          <button
+            (click)="selectedCategory.set(cat)"
+            [class.bg-foreground]="selectedCategory() === cat"
+            [class.text-background]="selectedCategory() === cat"
+            class="px-6 py-2 rounded-full border border-foreground/10 text-xs font-bold uppercase tracking-widest hover:border-foreground transition-all"
+          >
+            {{ cat }}
+          </button>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Grid de Productos -->
+  <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      @for (prod of filteredProducts; track prod.name) {
+        <div class="group cursor-pointer animate-in fade-in zoom-in duration-500">
+          <div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-6 bg-foreground/5">
+            <img [src]="prod.img" [alt]="prod.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" referrerpolicy="no-referrer" />
+            <div class="absolute top-4 left-4">
+              @if (prod.category === 'Nuevo') {
+                <span class="bg-yellow-500 text-black text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Nuevo</span>
+              }
+            </div>
+            <button class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <span class="bg-white text-black px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">Añadir</span>
+            </button>
+          </div>
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="text-sm font-bold uppercase tracking-tight mb-1">{{ prod.name }}</h3>
+              <p class="text-xs text-foreground/40 uppercase tracking-widest">{{ prod.category }}</p>
+            </div>
+            <p class="text-sm font-bold">{{ prod.price }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- 3. Banner Promocional -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto relative h-[400px] rounded-3xl overflow-hidden flex items-center px-12 md:px-24">
+      <img
+        src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&q=80&w=1920"
+        alt="Promo Banner"
+        class="absolute inset-0 w-full h-full object-cover"
+        referrerpolicy="no-referrer"
+      />
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="relative z-10 max-w-lg space-y-6">
+        <h2 class="text-4xl md:text-6xl font-bold text-white tracking-tighter uppercase leading-none">Venta de <br/> Temporada</h2>
+        <p class="text-white/80 text-lg">Hasta un 40% de descuento en artículos seleccionados de la colección anterior.</p>
+        <button class="bg-white text-black px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-yellow-500 transition-colors">
+          Explorar Ofertas
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Localizador / Contacto -->
+  <section class="py-24 px-6 bg-foreground/5">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+      <div class="space-y-8">
+        <h2 class="text-4xl font-bold tracking-tighter uppercase">Visítanos en Tienda</h2>
+        <p class="text-foreground/60 leading-relaxed">
+          Nuestras tiendas físicas son espacios diseñados para ofrecerte una experiencia sensorial completa. Ven a tocar los tejidos y a probarte nuestras piezas.
+        </p>
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <lucide-icon name="Menu" class="w-5 h-5 text-yellow-500"></lucide-icon>
+            <span class="text-sm font-medium">Calle de la Elegancia 12, Madrid</span>
+          </div>
+          <div class="flex items-center space-x-4">
+            <lucide-icon name="Menu" class="w-5 h-5 text-yellow-500"></lucide-icon>
+            <span class="text-sm font-medium">Lun - Sáb: 10:00 - 20:00</span>
+          </div>
+        </div>
+        <button class="text-sm font-bold uppercase tracking-widest border-b-2 border-yellow-500 pb-1">Ver todas las tiendas</button>
+      </div>
+      <div class="rounded-3xl overflow-hidden h-[400px] shadow-2xl">
+        <img
+          src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&q=80&w=800"
+          alt="Store Interior"
+          class="w-full h-full object-cover"
+          referrerpolicy="no-referrer"
+        />
+      </div>
+    </div>
+  </section>
+</div>

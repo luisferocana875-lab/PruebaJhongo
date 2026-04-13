@@ -1,0 +1,91 @@
+<div class="pt-10">
+  <!-- 1. Header de Página -->
+  <section class="py-20 px-6 bg-foreground/5 text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="text-xs font-bold uppercase tracking-[0.3em] text-yellow-500 mb-4 block">Catálogo</span>
+      <h1 class="text-5xl md:text-7xl font-bold tracking-tighter uppercase mb-6">Nuestros Productos</h1>
+      <p class="text-foreground/60 max-w-2xl mx-auto text-lg">
+        Explora nuestra selección de prendas diseñadas bajo los principios de simplicidad, calidad y atemporalidad.
+      </p>
+    </div>
+  </section>
+
+  <!-- 2. Categorías -->
+  <section class="py-24 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      @for (cat of categories; track cat.name) {
+        <div class="group relative overflow-hidden rounded-2xl aspect-square cursor-pointer">
+          <img [src]="cat.img" [alt]="cat.name" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" referrerpolicy="no-referrer" />
+          <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
+            <h3 class="text-2xl font-bold uppercase tracking-widest">{{ cat.name }}</h3>
+            <p class="text-xs uppercase tracking-widest opacity-70 mt-2">{{ cat.count }} Artículos</p>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- 3. Producto Destacado / Detalle -->
+  <section class="py-24 px-6 bg-foreground text-background">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+      <div class="space-y-10">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.3em] text-yellow-500 mb-4 block">Destacado del Mes</span>
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase leading-none">La Camiseta <br/> Perfeccionada</h2>
+        </div>
+        <div class="space-y-6">
+          @for (feat of features; track feat.title) {
+            <div class="flex items-start space-x-4">
+              <div class="mt-1 bg-yellow-500/20 p-1 rounded-full">
+                <lucide-icon name="Check" class="w-4 h-4 text-yellow-500"></lucide-icon>
+              </div>
+              <div>
+                <h4 class="font-bold uppercase tracking-widest text-sm">{{ feat.title }}</h4>
+                <p class="text-background/60 text-sm">{{ feat.desc }}</p>
+              </div>
+            </div>
+          }
+        </div>
+        <button class="bg-yellow-500 text-black px-10 py-4 rounded-full font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+          Ver Detalles
+        </button>
+      </div>
+      <div class="relative">
+        <img
+          src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&q=80&w=800"
+          alt="Featured Product"
+          class="rounded-3xl shadow-2xl"
+          referrerpolicy="no-referrer"
+        />
+        <div class="absolute -bottom-10 -right-10 bg-yellow-500 text-black p-8 rounded-2xl shadow-2xl hidden md:block">
+          <p class="text-4xl font-black">45€</p>
+          <p class="text-xs font-bold uppercase tracking-widest opacity-60">Precio Lanzamiento</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Información de Envío / FAQ -->
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div class="space-y-6">
+        <h3 class="text-2xl font-bold uppercase tracking-tighter">Envío y Devoluciones</h3>
+        <p class="text-foreground/60 text-sm leading-relaxed">
+          Ofrecemos envío gratuito en pedidos superiores a 100€. Todos nuestros paquetes se envían en embalajes 100% reciclables y libres de plástico.
+        </p>
+        <p class="text-foreground/60 text-sm leading-relaxed">
+          Si no estás satisfecho con tu compra, tienes 30 días para realizar una devolución gratuita.
+        </p>
+      </div>
+      <div class="space-y-6">
+        <h3 class="text-2xl font-bold uppercase tracking-tighter">Cuidado de la Prenda</h3>
+        <p class="text-foreground/60 text-sm leading-relaxed">
+          Para mantener la calidad de nuestras fibras naturales, recomendamos lavar en frío y evitar el uso de secadora.
+        </p>
+        <p class="text-foreground/60 text-sm leading-relaxed">
+          El planchado a baja temperatura preservará la suavidad del tejido por años.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
